@@ -81,7 +81,7 @@ class Login extends Component {
             onChange={ this.handleChange }
             name="name"
             value={ name }
-            placeholder="Nome"
+            placeholder="Name"
           />
           <button
             className={ styles.button }
@@ -90,7 +90,7 @@ class Login extends Component {
             onClick={ this.handleClick }
             disabled={ disable }
           >
-            Entrar
+            Login
           </button>
         </form>
       </div>

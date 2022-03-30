@@ -38,7 +38,11 @@ class Header extends Component {
         {!loading && (
           <div className={ styles.header_container }>
             <div className={ styles.header_top }>
-              <img src={ searchLogo } alt="logo TrybeTunes" className="image-Header" />
+              <img
+                src={ searchLogo }
+                alt="logo TrybeTunes"
+                className={ styles.img_header }
+              />
               <span
                 className={ styles.name_container }
                 data-testid="header-user-name"
@@ -50,20 +54,23 @@ class Header extends Component {
               <Link
                 className={ styles.link }
                 to="/search"
+                data-testid="link-to-search"
               >
-                Pesquisa
+                Search
               </Link>
               <Link
                 className={ styles.link }
                 to="/favorites"
+                data-testid="link-to-favorites"
               >
-                Favoritos
+                Favorites
               </Link>
               <Link
                 className={ styles.link }
                 to="/profile"
+                data-testid="link-to-profile"
               >
-                Perfil
+                Profile
               </Link>
             </div>
           </div>

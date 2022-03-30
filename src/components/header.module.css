@@ -7,12 +7,21 @@
 }
 
 .header_top {
-  align-items: center;
+  align-items: flex-end;
   background: #023031;
   box-shadow: 0 4px 1px rgba(0, 0, 0, 0.25);
   display: flex;
+  flex-direction: column;
   height: 96px;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.img_header {
+  height: 96px;
+  left: 35px;
+  position: absolute;
+  top: -14px;
+  width: 117px;
 }
 
 .name_container {
