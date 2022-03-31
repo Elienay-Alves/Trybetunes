@@ -13,7 +13,7 @@ class Search extends Component {
       loading: false,
       album: [],
       result: '',
-      renderAlbumCard: false,
+      renderAlbum: false,
     };
   }
 
