@@ -2,12 +2,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class MusicCard extends Component {
+  constructor(props) {
+    super(props);
+    this.takeFavorites();
+  }
+
   handleChange = ({ target }) => {
     const { name, checked } = target;
     this.setState({
       [name]: checked,
     });
   };
+
+  takeFavorites = () => {
+    const { favoriteSongs } = this.props;
+    const checking = favoriteSongs.reduce((acc, { trackId }) => {
+      acc[trackId] = true;
+      return acc;
+    }, {});
+
+    this.state = { ...checking };
+  }
 
   render() {
     const {
@@ -16,6 +31,8 @@ class MusicCard extends Component {
       trackId,
       favorite,
     } = this.props;
+    const checkingValues = Object.keys(this.state);
+    const itsChecked = checkingValues.includes(`${trackId}`);
 
     return (
       <div>
@@ -37,6 +54,7 @@ class MusicCard extends Component {
             type="checkbox"
             onChange={ this.handleChange }
             onClick={ (event) => favorite(event) }
+            checked={ itsChecked }
           />
         </label>
       </div>
@@ -49,6 +67,7 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   favorite: PropTypes.func.isRequired,
+  favoriteSongs: PropTypes.string.isRequired,
 };
 
 export default MusicCard;
