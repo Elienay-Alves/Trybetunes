@@ -9,7 +9,7 @@ import ProfileEdit from './ProfileEdit';
 import NotFound from './NotFound';
 // import Loading from './Loading';
 
-class Routes extends Component {
+export default class Routes extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -26,5 +26,3 @@ class Routes extends Component {
     );
   }
 }
-
-export default Routes;

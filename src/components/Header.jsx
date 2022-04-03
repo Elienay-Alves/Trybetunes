@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from '../pages/Loading';
-import searchLogo from '../images/searchLogo.png';
-import styles from './header.module.css';
 
 class Header extends Component {
   constructor() {
@@ -36,37 +34,28 @@ class Header extends Component {
       >
         {loading && (<Loading />)}
         {!loading && (
-          <div className={ styles.header_container }>
-            <div className={ styles.header_top }>
-              <img
-                src={ searchLogo }
-                alt="logo TrybeTunes"
-                className={ styles.img_header }
-              />
+          <div>
+            <div>
               <span
-                className={ styles.name_container }
                 data-testid="header-user-name"
               >
                 { name }
               </span>
             </div>
-            <div className={ styles.header_bot }>
+            <div>
               <Link
-                className={ styles.link }
                 to="/search"
                 data-testid="link-to-search"
               >
                 Search
               </Link>
               <Link
-                className={ styles.link }
                 to="/favorites"
                 data-testid="link-to-favorites"
               >
                 Favorites
               </Link>
               <Link
-                className={ styles.link }
                 to="/profile"
                 data-testid="link-to-profile"
               >

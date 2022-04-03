@@ -83,6 +83,7 @@ class Search extends Component {
                     onChange={ this.handleChange }
                     name="search"
                     value={ search }
+                    placeholder="Type here"
                   />
                   <button
                     data-testid="search-artist-button"
