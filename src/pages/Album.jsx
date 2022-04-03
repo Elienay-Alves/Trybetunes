@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class Album extends Component {
@@ -37,7 +37,6 @@ class Album extends Component {
     const { musicList } = this.state;
     if (checked) {
       const favorites = musicList.find((music) => music.trackId === +id);
-
       this.setState({
         loadingF: true,
       }, async () => {
@@ -49,7 +48,37 @@ class Album extends Component {
         }
       });
     }
+    const favorites = musicList.find((music) => music.trackId === +id);
+    this.setState({
+      loadingF: true,
+    }, async () => {
+      const removeFavorites = await removeSong(favorites);
+      if (removeFavorites) {
+        this.setState({
+          loadingF: false,
+        });
+      }
+    });
   }
+
+  // removeFavMusicList = async ({ target }) => {
+  //   const { id, checked } = target;
+  //   const { musicList } = this.state;
+  //   if (checked) {
+  //     const favorites = musicList.find((music) => music.trackId === +id);
+
+  //     this.setState({
+  //       loadingF: true,
+  //     }, async () => {
+  //       const removeFavorites = await removeSong(favorites);
+  //       if (removeFavorites) {
+  //         this.setState({
+  //           loadingF: false,
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
 
   render() {
     const {
@@ -85,6 +114,7 @@ class Album extends Component {
                     trackId={ trackId }
                     favorite={ this.favMusicList }
                     favoriteSongs={ favoriteSongs }
+                    loadingFavorite={ loadingF }
                   />
                 ))
               }

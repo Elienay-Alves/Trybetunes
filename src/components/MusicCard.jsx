@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 class MusicCard extends Component {
   constructor(props) {
     super(props);
-    this.takeFavorites();
+
+    this.state = {
+      checked: false,
+    };
+  }
+
+  componentDidMount() {
+    this.getFavorites();
   }
 
   handleChange = ({ target }) => {
@@ -14,14 +21,21 @@ class MusicCard extends Component {
     });
   };
 
-  takeFavorites = () => {
-    const { favoriteSongs } = this.props;
-    const checking = favoriteSongs.reduce((acc, { trackId }) => {
-      acc[trackId] = true;
-      return acc;
-    }, {});
+  getFavorites = () => {
+    const { favoriteSongs, trackId } = this.props;
+    favoriteSongs.filter((favorite) => {
+      const check = favorite.trackId === trackId ? this.setState({ checked: true }) : '';
+      return check;
+    });
+  }
 
-    this.state = { ...checking };
+  takeFavorites = () => {
+    const { trackId } = this.props;
+    const checkingValues = Object.keys(this.state);
+    const itsChecked = checkingValues.includes(`${trackId}`);
+    this.state = {
+      checked: itsChecked,
+    };
   }
 
   render() {
@@ -31,8 +45,7 @@ class MusicCard extends Component {
       trackId,
       favorite,
     } = this.props;
-    const checkingValues = Object.keys(this.state);
-    const itsChecked = checkingValues.includes(`${trackId}`);
+    const { checked } = this.state;
 
     return (
       <div>
@@ -44,17 +57,17 @@ class MusicCard extends Component {
           .
         </audio>
         <label
-          htmlFor={ trackId }
+          htmlFor={ `${trackId}` }
         >
           favorite
           <input
             data-testid={ `checkbox-music-${trackId}` }
             id={ trackId }
-            name={ trackId }
+            name="checked"
             type="checkbox"
             onChange={ this.handleChange }
             onClick={ (event) => favorite(event) }
-            checked={ itsChecked }
+            checked={ checked }
           />
         </label>
       </div>
